@@ -1,0 +1,163 @@
+openapi: 3.0.0
+info:
+  title: 'Notebook API Documentation'
+  description: 'Notebook API Documentation'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://phptest2'
+    description: 'Demo API Server'
+paths:
+  /api/v1/notebook:
+    get:
+      tags:
+        - Notebook
+      summary: 'Get list of notes'
+      description: 'Returns list of notes'
+      operationId: getNotesList
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'Page number'
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResource'
+    post:
+      tags:
+        - Notebook
+      summary: 'Store new note'
+      description: 'Returns note data'
+      operationId: storeNotebook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreRequest'
+      responses:
+        201:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notebook'
+        422:
+          description: 'Unprocessable Content'
+        400:
+          description: 'Bad Request'
+  '/api/v1/notebook/{id}':
+    get:
+      tags:
+        - Notebook
+      summary: 'Get note information'
+      description: 'Returns note data'
+      operationId: getNoteById
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Note id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notebook'
+        404:
+          description: 'Not Found'
+    delete:
+      tags:
+        - Notebook
+      summary: 'Delete existing note'
+      description: 'Deletes a record and returns no content'
+      operationId: deleteNote
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Note id'
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: 'Successful operation'
+        404:
+          description: 'Not Found'
+    patch:
+      tags:
+        - Notebook
+      summary: 'Update existing note'
+      description: 'Returns updated note data'
+      operationId: updateNote
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Note id'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notebook'
+        422:
+          description: 'Unprocessable Content'
+        404:
+          description: 'Not Found'
+        400:
+          description: 'Bad Request'
+components:
+  schemas:
+    StoreRequest:
+      title: StoreRequest
+      description: 'Store request body data'
+      required:
+        - name
+        - phone_number
+        - email
+      type: object
+    UpdateRequest:
+      title: UpdateRequest
+      description: 'Update request body data'
+      required:
+        - name
+        - phone_number
+        - email
+      type: object
+    NotebookResource:
+      title: NotebookResource
+      description: 'Notebook resource'
+      xml:
+        name: NotebookResource
+    Notebook:
+      title: Notebook
+      description: 'Notebook model'
+      xml:
+        name: Notebook
+tags:
+  -
+    name: Notebook
+    description: 'API Endpoints'
