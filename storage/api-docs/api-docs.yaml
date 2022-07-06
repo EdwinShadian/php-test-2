@@ -49,8 +49,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Notebook'
-        422:
-          description: 'Unprocessable Content'
         400:
           description: 'Bad Request'
   '/api/v1/notebook/{id}':
@@ -123,8 +121,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Notebook'
-        422:
-          description: 'Unprocessable Content'
         404:
           description: 'Not Found'
         400:

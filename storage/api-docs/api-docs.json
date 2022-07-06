@@ -72,9 +72,6 @@
                             }
                         }
                     },
-                    "422": {
-                        "description": "Unprocessable Content"
-                    },
                     "400": {
                         "description": "Bad Request"
                     }
@@ -181,9 +178,6 @@
                                 }
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Content"
                     },
                     "404": {
                         "description": "Not Found"
